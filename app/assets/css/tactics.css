@@ -1,0 +1,19 @@
+.player-base, .player, .toolbar-gadget {
+  max-width: 36px;
+  width: auto; }
+
+.player {
+  position: absolute; }
+
+.toolbar-gadget {
+  vertical-align: center;
+  z-index: 4; }
+
+#playingField {
+  width: 1280px;
+  height: 801px;
+  vertical-align: top;
+  margin-top: 20px;
+  background-image: url("../img/soccer-field.png");
+  background-repeat: no-repeat;
+  position: relative; }

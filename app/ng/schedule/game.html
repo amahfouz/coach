@@ -1,0 +1,6 @@
+<div ng-switch="game!=null">
+	<div ng-switch-when="true">
+		{{gameInfoPrefix}} on {{game.date}} against "{{game.opponent}}".
+	</div>
+	<span ng-switch-default>{{noGameMsg}}</span>
+</div>

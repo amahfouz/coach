@@ -1,0 +1,22 @@
+{
+  "name": "coach",
+  "description": "Team coach tactics app",
+  "version": "0.0.0",
+  "homepage": "https://github.com/amahfouz/coach",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "html5-boilerplate": "~5.2.0",
+    "bootstrap": "~3.3.5",
+    "angular-strap": "~2.3.4",
+    "angular-animate": "~1.4.7",
+    "angular-motion": "~0.4.3",
+    "angular-sanitize": "~1.4.7",
+    "angular-dragdrop": "~1.0.12",
+    "chance": "~0.8.0",
+    "lodash": "~3.10.1"
+  }
+}

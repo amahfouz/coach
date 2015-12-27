@@ -1,0 +1,43 @@
+
+<div class="panel panel-info">
+
+  <div class="panel-heading">Team Members</div>
+
+	  <table class="table">
+	    <thead><tr>
+	    	<th>Shirt#</th>
+	    	<th>Name</th>
+	    </tr></thead>
+
+		<tbody ng-repeat="player in players">
+			<tr>
+				<td>{{player.shirt}}</td>
+				<td>{{player.name}}</td>
+			</tr>
+		</tbody>
+	  </table>
+  </div>
+
+
+	<div>
+		<form class="form-inline">
+		  <div class="form-group">
+		    <label for="player-name">Name</label>
+		    <input type="text" class="form-control" placeholder="Jane Doe" ng-model="newPlayerName">
+		  </div>
+
+			<div class="form-group">
+			  <div class="input-group">
+			    <span class="input-group-addon">#</span>
+			    <input type="text" class="form-control" ng-model="newPlayerShirt">
+			  </div>
+			</div>
+
+		  <button id="addPlayerButton" type="submit" class="btn btn-default" 
+		  		  ng-click="addPlayer()" bs-alert>Add Player</button>
+
+		</form>		
+	</div>   
+</div>
+
+

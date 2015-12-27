@@ -1,0 +1,33 @@
+$player-diameter: 36px;
+$field-width: 1280px;
+$field-height: 801px;
+$vertical-spacing: 20px; 
+$field-image: '../img/soccer-field.png';
+
+.player-base {
+    max-width: $player-diameter;
+    width: auto;
+    
+}
+
+.player {
+    @extend .player-base;
+    position: absolute;
+}
+
+.toolbar-gadget {
+	@extend .player-base;
+	vertical-align: center;
+    z-index: 4;
+}
+
+#playingField {
+    width: $field-width; 
+    height: $field-height;
+    vertical-align: top;
+    margin-top: $vertical-spacing;
+    background-image: url($field-image);
+    background-repeat: no-repeat;
+    
+    position: relative;
+}
