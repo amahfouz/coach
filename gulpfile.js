@@ -26,6 +26,8 @@ gulp.task('copy-additional-bower-files', function(){
 });
 
 //Watch task
-gulp.task('default',function() {
+gulp.task('watch-sass',function() {
     gulp.watch('app/assets/sass/*.scss',['compile-sass']);
 });
+
+gulp.task('default', ['compile-sass', 'main-bower-files', 'copy-additional-bower-files']);

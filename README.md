@@ -10,9 +10,12 @@ This app aids soccer coaches (and other team sports) sketch and animate team tac
 npm install
 ```
 
+This will run bower to install dependencies, and also run gulp to copy files from bower_components to their right place under the 'app' folder.
+
 ## Running
 
-and to start the web server
+To start the web server
+
 ```
 npm start
 ```
