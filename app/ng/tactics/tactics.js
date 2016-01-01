@@ -19,7 +19,6 @@ angular.module('coach.tactics', ['ngRoute'])
 		return $scope.idCounter++;
 	};
 
-
 	this.nextId = function() {
 		return $scope.idCounter++;
 	};
@@ -49,8 +48,8 @@ angular.module('coach.tactics', ['ngRoute'])
 		$scope.editMode = false;
 	};	
 
-	$scope.deletePlayer = function() {
-		console.log("Delete player.");
+	$scope.addPlayer = function(playerInfo) {
+		selectedPlan.push(playerInfo);
 	};
 
 	$scope.showCtxMenu = function(player) {
@@ -66,7 +65,14 @@ angular.module('coach.tactics', ['ngRoute'])
 		dropdown.$scope.selectedPlayer = player;
 
 		dropdown.$scope.deletePlayer = function(playerInfo) {
-			console.log(playerInfo.id)
+			if (! $scope.selectedPlan) {
+				console.log("No tactic is selected.");
+				return;
+			}
+
+			_.remove($scope.selectedPlan.players, function(p) {
+				return p.id == playerInfo.id;
+			});
 		};
 
         dropdown.$scope.content = 
@@ -79,7 +85,7 @@ angular.module('coach.tactics', ['ngRoute'])
 	      ];
 
 		dropdown.$promise.then(function () {
-		        dropdown.show();
+		    dropdown.show();
 	    });
 	};	
 })

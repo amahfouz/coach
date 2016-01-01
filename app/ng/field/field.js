@@ -41,7 +41,7 @@ angular.module('coach.field', [])
 
 					dropped.removeAttr("clone-draggable");
 
-					var newId = "player" + controller.nextId();
+					
 					dropped.attr("id", newId);
 
 					var pos=$(ui.helper).offset();
