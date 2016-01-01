@@ -1,11 +1,8 @@
 'use strict';
 
 angular.module('coach.field', [])
-.controller("FieldController", function($scope, $alert) {
-	$scope.showCtxMenu = function() {
-		console.log("showCtxMenu");
-	};	
-})
+// .controller("FieldController", function($scope, $alert) {
+// })
 .directive("cloneDraggable", function() {
 	return {
 		link: function(scope, element, attrs, controller) {
@@ -18,18 +15,21 @@ angular.module('coach.field', [])
 .directive("draggablePlayer", function() {
 	return {
 		templateUrl: "ng/field/player.html",
+		replace: true,
 		link: { 
 			post: function postLink($scope, element, attrs, controller) {
 				console.log("linked the new element.")
-				element.css({"position": "absolute"});
-				element.draggable({ cursor: "crosshair", containment: 'parent'});
+				element.draggable({ cursor: "crosshair", containment: 'parent', 
+									start: function(event, ui) {
+										console.log("Drag started");
+									}
+								  });
 			}
 		}
 	}
 })
 .directive("soccerField", function(tacticsService, $compile) {
 	return {
-		templateUrl: "ng/field/field.html",
 		controller: "TacticsCtrl",
 	    link: function($scope, element, attrs, controller) {
 	    	element.droppable({		

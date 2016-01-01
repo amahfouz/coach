@@ -16,6 +16,7 @@ gulp.task('main-bower-files', function() {
 gulp.task('copy-additional-bower-files', function(){
 	gulp.src(['app/bower_components/bootstrap/dist/css/bootstrap.css',
 		      'app/bower_components/bootstrap/dist/fonts/**',
+		      'app/bower_components/components-font-awesome/**',
 		      'app/bower_components/angular-strap/dist/modules/parse-options.js',
 		      'app/bower_components/angular-strap/dist/modules/tooltip.js',
 		      'app/bower_components/angular-strap/dist/modules/dimensions.js',

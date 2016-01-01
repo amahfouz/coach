@@ -12,15 +12,21 @@ angular.module('coach', [
   'coach.home',
   'ngDragDrop',
   'mgcrea.ngStrap',
+  'mgcrea.ngStrap.tooltip',
   'mgcrea.ngStrap.modal',
+  'mgcrea.ngStrap.dropdown',
   'mgcrea.ngStrap.helpers.dimensions',
   'mgcrea.ngStrap.helpers.parseOptions',
-  'mgcrea.ngStrap.tooltip',
   'mgcrea.ngStrap.select'
 ])
-
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});
-}]);
+}])
+.config(function($dropdownProvider) {
+  angular.extend($dropdownProvider.defaults, {
+    html: true
+  });
+})
+;
 
 

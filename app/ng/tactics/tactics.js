@@ -11,15 +11,20 @@ angular.module('coach.tactics', ['ngRoute'])
 
 .service('tacticsService', TacticsServiceFactory) 
 
-.controller('TacticsCtrl', function($scope, $alert, tacticsService) {
+.controller('TacticsCtrl', function($scope, $alert, $dropdown, tacticsService) {
 
 	$scope.idCounter = 0;
+
+	$scope.test = function() {
+		return $scope.idCounter++;
+	};
+
 
 	this.nextId = function() {
 		return $scope.idCounter++;
 	};
 
-	$scope.editMode = true;
+	$scope.editMode = false;
 
 	$scope.plans = tacticsService.getPlanList();
 	$scope.selectedPlan = tacticsService.newPlan();
@@ -42,6 +47,40 @@ angular.module('coach.tactics', ['ngRoute'])
 
 	$scope.save = function() {
 		$scope.editMode = false;
+	};	
+
+	$scope.deletePlayer = function() {
+		console.log("Delete player.");
+	};
+
+	$scope.showCtxMenu = function(player) {
+		var elementId = player.id;
+		var element = $('#' + elementId)
+
+		var dropdown = $dropdown(element, {
+			show: false,
+			trigger: "manual",
+			html: true
+		});
+
+		dropdown.$scope.selectedPlayer = player;
+
+		dropdown.$scope.deletePlayer = function(playerInfo) {
+			console.log(playerInfo.id)
+		};
+
+        dropdown.$scope.content = 
+	  	  [
+		    {text: '<i class="fa fa-download"></i>&nbsp;Another action', "click": 'console.log("First item")'},
+		    {text: '<i class="fa fa-globe"></i>&nbsp;Display an alert', "click": '$alert("Holy guacamole!")'},
+		    {text: '<i class="fa fa-remove"></i>&nbsp;Delete', "click": 'deletePlayer(selectedPlayer)'},
+		    {divider: true},
+		    {text: 'Separated link', href: '#separatedLink'}
+	      ];
+
+		dropdown.$promise.then(function () {
+		        dropdown.show();
+	    });
 	};	
 })
 ;
