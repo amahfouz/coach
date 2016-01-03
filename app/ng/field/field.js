@@ -48,8 +48,10 @@ angular.module('coach.field', [])
 					var pos=$(ui.helper).offset();
 					var newX = pos.left- element.offset().left;
 					var newY = pos.top - element.offset().top;
+					var color = $(ui.helper).attr("player-color");
+
 					$scope.$apply(function() {
-						controller.addPlayer(newX, newY, "yellow");
+						controller.addPlayer(newX, newY, color);
 					});
 				}
 			});  // element.droppable

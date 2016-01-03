@@ -75,7 +75,7 @@ angular.module('coach.tactics', ['ngRoute'])
 			return;
 
 		item.x = newX;
-		item.y = newY;
+		item.y = newY ;
 	}
 
 	$scope.showCtxMenu = function(player) {
