@@ -4,8 +4,7 @@ angular.module('coach.tactics', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/tactics', {
-    templateUrl: 'ng/tactics/tactics.html',
-    controller: 'TacticsCtrl'
+    templateUrl: 'ng/tactics/tactics.html' 
   });
 }])
 
@@ -13,11 +12,9 @@ angular.module('coach.tactics', ['ngRoute'])
 
 .controller('TacticsCtrl', function($scope, $alert, $dropdown, tacticsService) {
 
-	$scope.idCounter = 0;
+	console.log("constructooooooooooooooooooooooooor.");
 
-	$scope.test = function() {
-		return $scope.idCounter++;
-	};
+	$scope.idCounter = 0;
 
 	this.nextId = function() {
 		return $scope.idCounter++;
@@ -27,11 +24,21 @@ angular.module('coach.tactics', ['ngRoute'])
 
 	$scope.plans = tacticsService.getPlanList();
 	$scope.selectedPlan = tacticsService.newPlan();
-	$scope.selectedPlanId = $scope.selectedPlan.id;
+	
+	$scope.selected = {'planId': undefined};
 
-	$scope.$watch('selectedPlanId', function(newValue, oldValue) {
-		if (newValue)
+	$scope.$watch('selected.planId', function(newValue, oldValue) {
+		if (oldValue == newValue)
+			return;
+
+		if (newValue == $scope.selectedPlan.id)
+			return;
+
+		//console.log("Old=" + oldValue + ", New=" + newValue + ", Selected=" + $scope.selected.planId);
+
+		if (newValue) {
 			$scope.selectedPlan = tacticsService.getById(newValue);
+		}
 		else
 			$scope.selectedPlan = tacticsService.newPlan();
 	});	
@@ -48,9 +55,28 @@ angular.module('coach.tactics', ['ngRoute'])
 		$scope.editMode = false;
 	};	
 
-	$scope.addPlayer = function(playerInfo) {
-		selectedPlan.push(playerInfo);
+	this.addPlayer = function(x, y, color) {
+		var newId = "player" + this.nextId();                                       
+		var playerInfo = {'id': newId, 'x': x, 'y': y, 'color': color};
+
+
+		$scope.selectedPlan.players.push(playerInfo);
 	};
+
+	this.updatePlayer = function(playerId, newX, newY) {
+		if (!$scope.selectedPlan)
+			return;
+
+		var item = _.find($scope.selectedPlan.players, function(item) {
+			return item.id == playerId;
+		});
+		console.log("item=" + item);
+		if (!item)
+			return;
+
+		item.x = newX;
+		item.y = newY;
+	}
 
 	$scope.showCtxMenu = function(player) {
 		var elementId = player.id;
@@ -130,6 +156,7 @@ function TacticsServiceFactory() {
 	};
 
 	this.getById = function(id) {
+		console.log("getById = " + id);
 		return _.find(this.plans, function(value) {
 			return id == value.id;
 		});

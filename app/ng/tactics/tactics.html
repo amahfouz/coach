@@ -10,7 +10,7 @@
 		<button type="button" 
 			    id="selectPlanButton"
 			    class="btn btn-default" 
-		        ng-model="selectedPlanId" data-html="1" 
+		        ng-model="selected.planId" data-html="1" 
 		        placeholder="(Select a tactic)"
 		        bs-options="plan.id as plan.name for plan in plans" 
 		        bs-select
@@ -19,7 +19,7 @@
 		<button type="submit" class="btn btn-primary" ng-click="play()">
 			<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Play
 		</button>
-		<button type="submit" class="btn btn-primary" ng-click="edit()" ng-disabled="!selectedPlanId">
+		<button type="submit" class="btn btn-primary" ng-click="edit()" ng-disabled="!selected.planId">
 			<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
 		</button>
 		<button type="submit" class="btn btn-danger" ng-click="delete()">
@@ -57,7 +57,7 @@
 <div class="row">	 
 	<div class="col-md-12">
 		<div soccer-field id="playingField">
-			<draggable-player ng-repeat="playerInfo in selectedPlan.players" player-info="playerInfo"></draggable-player>
+			<div draggable-player ng-repeat="playerInfo in selectedPlan.players" player-info="playerInfo"></div>
 		</div> 
 	</div> 
 </div> 

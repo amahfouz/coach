@@ -15,15 +15,23 @@ angular.module('coach.field', [])
 .directive("draggablePlayer", function() {
 	return {
 		templateUrl: "ng/field/player.html",
+		//controller: "TacticsCtrl",
 		replace: true,
+		require: "^soccerField",
 		link: { 
-			post: function postLink($scope, element, attrs, controller) {
-				console.log("linked the new element.")
-				element.draggable({ cursor: "crosshair", containment: 'parent', 
-									start: function(event, ui) {
-										console.log("Drag started");
-									}
-								  });
+			post: function postLink($scope, element, attrs, tacticsCtrl) {
+				element.draggable
+					 ({ cursor: "crosshair", containment: 'parent', 
+						stop: function(event, ui) {
+							$scope.$apply(function() {
+								if (! event) 
+									return;
+
+								var el = event.target;
+								tacticsCtrl.updatePlayer(el.id, el.offsetLeft, el.offsetTop);
+							});
+						}
+					  });
 			}
 		}
 	}
@@ -37,28 +45,12 @@ angular.module('coach.field', [])
 					if (! ui.helper.hasClass("toolbar-gadget"))
 						return;
 
-					var dropped=$(ui.draggable).clone();
-
-					dropped.removeAttr("clone-draggable");
-
-					
-					dropped.attr("id", newId);
-
 					var pos=$(ui.helper).offset();
-					
 					var newX = pos.left- element.offset().left;
 					var newY = pos.top - element.offset().top;
-
-					dropped.css({"left":newX,"top":newY, "z-index": 100});
-					dropped.removeClass("toolbar-gadget");
-					dropped.addClass("player");
-
-					// make it a directive
-					dropped.attr("draggable-player", "");
-					dropped.attr("ng-click", "showCtxMenu()");
-
-					var compiled = $compile(dropped)($scope);
-					$(this).append(compiled);
+					$scope.$apply(function() {
+						controller.addPlayer(newX, newY, "yellow");
+					});
 				}
 			});  // element.droppable
 		}
