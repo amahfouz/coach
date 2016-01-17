@@ -55,6 +55,11 @@ angular.module('coach.tactics', ['ngRoute'])
 		$scope.editMode = false;
 	};	
 
+$scope.test = function() {
+	$(".player").animate({left: "+=100"}, 500);
+};
+
+
 	this.addPlayer = function(x, y, color) {
 		var newId = "player" + this.nextId();                                       
 		var playerInfo = {'id': newId, 'x': x, 'y': y, 'color': color};
