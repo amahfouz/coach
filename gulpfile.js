@@ -1,6 +1,13 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var jshint = require('gulp-jshint');
 var mainBowerFiles = require('main-bower-files');
+ 
+gulp.task('lint', function() {
+  return gulp.src('app/ng/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
 
 gulp.task('compile-sass', function() {
     gulp.src('app/assets/sass/*.scss')

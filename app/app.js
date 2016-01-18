@@ -5,13 +5,13 @@ angular.module('coach', [
   'ngRoute',
   'ngSanitize',
   'ngAnimate',
+  'mgcrea.ngStrap',
   'coach.team',
   'coach.schedule',
   'coach.tactics',
   'coach.field',
   'coach.home',
-  'mgcrea.ngStrap'
-  //'floatingWindow'
+  'adminMenu'
 ])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});

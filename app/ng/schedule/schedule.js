@@ -33,4 +33,4 @@ function GameScheduleFactory() {
 		{"date": "22/01/2016", "opponent": "Crazy Boys", "field": "1", "home": "Away", "notes": ""},
 		{"date": "29/01/2016", "opponent": "Bingo Toys", "field": "3", "home": "Home", "notes": ""},
 	];
-};
+}

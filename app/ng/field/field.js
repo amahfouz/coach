@@ -10,7 +10,7 @@ angular.module('coach.field', [])
 				                revert: 'invalid', 
 				                cursor: "crosshair"});	
 		}
-	}
+	};
 })
 .directive("draggablePlayer", function() {
 	return {
@@ -34,7 +34,7 @@ angular.module('coach.field', [])
 					  });
 			}
 		}
-	}
+	};
 })
 .directive("soccerField", function(tacticsService, $compile) {
 	return {
@@ -56,7 +56,7 @@ angular.module('coach.field', [])
 				}
 			});  // element.droppable
 		}
-	}
+	};
 })
 ;
 

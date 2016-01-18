@@ -12,8 +12,6 @@ angular.module('coach.tactics', ['ngRoute'])
 
 .controller('TacticsCtrl', function($scope, $alert, $dropdown, tacticsService) {
 
-	console.log("constructooooooooooooooooooooooooor.");
-
 	$scope.idCounter = 0;
 
 	this.nextId = function() {
@@ -84,11 +82,11 @@ angular.module('coach.tactics', ['ngRoute'])
 
 		item.x = newX;
 		item.y = newY ;
-	}
+	};
 
 	$scope.showCtxMenu = function(player) {
 		var elementId = player.id;
-		var element = $('#' + elementId)
+		var element = $('#' + elementId);
 
 		var dropdown = $dropdown(element, {
 			show: false,
@@ -100,7 +98,6 @@ angular.module('coach.tactics', ['ngRoute'])
 
 		dropdown.$scope.deletePlayer = function(playerInfo) {
 			if (! $scope.selectedPlan) {
-				console.log("No tactic is selected.");
 				return;
 			}
 
@@ -159,7 +156,7 @@ function TacticsServiceFactory() {
 
 	this.getPlanList = function() {
 		return _.map(this.plans, function(entry) { 
-			return _.pick(entry, ['id', 'name']) 
+			return _.pick(entry, ['id', 'name']);
 		});
 	};
 

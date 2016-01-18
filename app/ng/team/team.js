@@ -18,7 +18,7 @@ angular.module('coach.team', ['ngRoute'])
     $scope.newPlayerShirt = "";
 
     $scope.addPlayer = function() {
-    	if (this.newPlayerName == "" || this.newPlayerShirt == "") {
+    	if (this.newPlayerName === "" || this.newPlayerShirt === "") {
 		    var missingInputAlert = {
 			  "title": "Missing Input", 
 			  "content": "Enter the player name and shirt number.",
