@@ -45,10 +45,14 @@
 			<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
 		</button>
 
- <button type="submit" class="btn btn-success" ng-click="test()">
-     <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Test
-</button>
+		<button type="button" class="btn btn-primary" bs-aside="aside">
+			<span class="glyphicon glyphicon-film"></span> 
+			Animation
+		</button>
 
+		<button type="submit" class="btn btn-success" ng-click="test()">
+			<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Test
+		</button>
 
 		<span>
 		<img src="assets/img/yellow-circle.png" id="yellow-circle"  	 	
@@ -72,4 +76,10 @@
 		</div> 
 	</div> 
 </div> 
+
+    <draggable template="/tmpls/floatingMenu" id="adminFloatingMenu" options="{addClasses: false, cancel: '.panel-body', opacity: 0.35}">
+      
+      <div> HE </div>
+    </draggable>
+
 

@@ -15,7 +15,6 @@
     "angular-animate": "~1.4.7",
     "angular-motion": "~0.4.3",
     "angular-sanitize": "~1.4.7",
-    "angular-dragdrop": "~1.0.12",
     "chance": "~0.8.0",
     "lodash": "~3.10.1",
     "components-font-awesome": "~4.5.0"

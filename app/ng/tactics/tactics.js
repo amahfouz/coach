@@ -27,6 +27,11 @@ angular.module('coach.tactics', ['ngRoute'])
 	
 	$scope.selected = {'planId': undefined};
 
+	$scope.aside = {
+	  "title": "Title",
+	  "content": "Hello Aside<br />This is a multiline message!"
+	};
+
 	$scope.$watch('selected.planId', function(newValue, oldValue) {
 		if (oldValue == newValue)
 			return;
@@ -55,15 +60,13 @@ angular.module('coach.tactics', ['ngRoute'])
 		$scope.editMode = false;
 	};	
 
-$scope.test = function() {
-	$(".player").animate({left: "+=100"}, 500);
-};
-
+	$scope.test = function() {
+		$(".player").animate({left: "+=100"}, 500);
+	};
 
 	this.addPlayer = function(x, y, color) {
 		var newId = "player" + this.nextId();                                       
 		var playerInfo = {'id': newId, 'x': x, 'y': y, 'color': color};
-
 
 		$scope.selectedPlan.players.push(playerInfo);
 	};
@@ -75,7 +78,7 @@ $scope.test = function() {
 		var item = _.find($scope.selectedPlan.players, function(item) {
 			return item.id == playerId;
 		});
-		console.log("item=" + item);
+		
 		if (!item)
 			return;
 
@@ -161,7 +164,6 @@ function TacticsServiceFactory() {
 	};
 
 	this.getById = function(id) {
-		console.log("getById = " + id);
 		return _.find(this.plans, function(value) {
 			return id == value.id;
 		});

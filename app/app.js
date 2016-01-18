@@ -10,14 +10,8 @@ angular.module('coach', [
   'coach.tactics',
   'coach.field',
   'coach.home',
-  'ngDragDrop',
-  'mgcrea.ngStrap',
-  'mgcrea.ngStrap.tooltip',
-  'mgcrea.ngStrap.modal',
-  'mgcrea.ngStrap.dropdown',
-  'mgcrea.ngStrap.helpers.dimensions',
-  'mgcrea.ngStrap.helpers.parseOptions',
-  'mgcrea.ngStrap.select'
+  'mgcrea.ngStrap'
+  //'floatingWindow'
 ])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});
