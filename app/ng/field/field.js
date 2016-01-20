@@ -38,6 +38,7 @@ angular.module('coach.field', [])
 })
 .directive("soccerField", function(tacticsService, $compile) {
 	return {
+		templateUrl: "ng/field/field.tpl.html",
 		controller: "TacticsCtrl",
 	    link: function($scope, element, attrs, controller) {
 	    	element.droppable({		

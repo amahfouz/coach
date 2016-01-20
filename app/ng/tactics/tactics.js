@@ -59,7 +59,16 @@ angular.module('coach.tactics', ['ngRoute'])
 	};	
 
 	$scope.test = function() {
-		$(".player").animate({left: "+=100"}, 500);
+		if (! $scope.selectedPlan)
+			return;
+
+		animatePlan($scope.selectedPlan.animation, 	function finalCompletion(err) {
+			console.log("Done " + err);
+		});
+	};
+
+	$scope.playerId = function(playerNumberId) {
+		return idFor(playerNumberId);
 	};
 
 	this.addPlayer = function(x, y, color) {
@@ -135,6 +144,19 @@ function TacticsServiceFactory() {
 				{'id': 3, 'x': '220', 'y': '220', 'color': 'yellow'},
 			],
 			'animation' : [
+				 {'label': "Phase 1", 
+				  'duration': 1000, 
+				  'transitions': [
+					 {'id': 1, 'x': '100', 'y': '80'},
+					 {'id': 2, 'x': '250', 'y': '20'}
+				  ]
+				 },
+				 {'label': "Phase 2", 
+				  'duration': 1500, 
+				  'transitions': [
+					 {'id': 3, 'x': '270', 'y': '10'},
+				  ]
+				 }
 			]
 		}, 
 		{
@@ -165,4 +187,33 @@ function TacticsServiceFactory() {
 			return id == value.id;
 		});
 	};
+};
+
+/// global
+
+function animatePlan(phases, finalCompletion) {
+
+	function animatePhase(phase, completionParam) {
+		performTransitions(phase.transitions, phase.duration, completionParam);
+	}
+
+	function performTransitions(transitions, duration, completionParam) {
+		// curry to provide duration which is not available for animateItem
+		async.each(transitions, _.curry(animateItem)(duration), completionParam);
+	}
+
+	function animateItem(duration, transition, callback) {
+		$('#' + idFor(transition.id)).animate(
+			{ left: transition.x + 'px', top: transition.y + 'px' }, 
+            duration, 'swing', callback);
+	}
+
+	// kick the animation of
+
+	async.eachSeries(phases, animatePhase, finalCompletion);
 }
+
+function idFor(playerNumberId) {
+	return 'player' + playerNumberId;
+}
+
