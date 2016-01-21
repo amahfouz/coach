@@ -1,70 +1,43 @@
 <!--<div class="row hideable-bar" >
-	<div class="col-md-3 col-md-offset-6">		
-		<div><img src="assets/yellow-circle.png" draggable-element id="yellow-circle" drop="handleDrop"/></div>
-	</div>
-</div>		 
--->
-<div class="row">
 
-	 <div class="col-md-7 btn-toolbar hideable-bar" role="toolbar" ng-hide="editMode">
-		<button type="button" 
-			    id="selectPlanButton"
-			    class="btn btn-default" 
-		        ng-model="selected.planId" data-html="1" 
-		        placeholder="(Select a tactic)"
-		        bs-options="plan.id as plan.name for plan in plans" 
-		        bs-select
-		        syle="min-width: 200px; width: 400px"><span class="caret"></span>
-		 </button>
+  In "Setup" mode
+
+  [Setup] Animate  ()()                   Play                         Save
+
+  In "Animate" mode
+
+   Setup [Animate]                        Play                         Save
+
+-->
+<div class="row btn-toolbar" role="toolbar">
+
+	<div class="col-md-5">
+		<div class="btn-group" role="group" ng-model="button.radio" bs-radio-group>
+ 		  <label class="btn btn-default">
+ 		  	 <input type="radio" class="btn btn-default" value="0">Setup
+ 		  </label>
+ 		  <label class="btn btn-default">
+ 		   	 <input type="radio" class="btn btn-default" value="1">Animate
+ 		  </label>
+		</div>
+		<div class="btn-group" role="group" ng-hide="isAnimateMode()">
+			<img src="assets/img/yellow-circle.png" id="yellow-circle"  	 	
+			   	 class="toolbar-gadget" player-color="yellow" clone-draggable />
+			<img src="assets/img/red-circle.png" id="red-circle" 
+				 class="toolbar-gadget" player-color="red" clone-draggable />
+		</div>
+	</div>
+
+	 <div class="col-md-2">
 		<button type="submit" class="btn btn-primary" ng-click="play()">
 			<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Play
 		</button>
-		<button type="submit" class="btn btn-primary" ng-click="edit()" ng-disabled="!selected.planId">
-			<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
-		</button>
-		<button type="submit" class="btn btn-danger" ng-click="delete()">
-			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
-		</button>
-		<button type="submit" class="btn btn-success" ng-click="delete()">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New
-		</button>
 	</div>
 
-	<div class="col-md-5 btn-toolbar hideable-bar" role="toolbar" ng-hide="!editMode">
-	     <strong>{{selectedPlan.name}}</strong>
-	     <button type="button" class="btn btn-primary btn-xs" 
-	     title="Edit Name" data-content="Enter a name for your tactic"
-	     data-template-url="./ng/tactics/name-popover.tpl.html" 
-	     data-animation="am-flip-x" data-auto-close="1" 
-	     bs-popover>Edit Name</button>
-
-		<button type="submit" class="btn btn-danger" ng-click="cancelEdit()">
-			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
-		</button>
+	<div class="col-md-5">
 		<button type="submit" class="btn btn-success" ng-click="save()">
 			<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
 		</button>
-
-		<button type="button" class="btn btn-primary" bs-aside="aside">
-			<span class="glyphicon glyphicon-film"></span> 
-			Animation
-		</button>
-
-		<button type="submit" class="btn btn-success" ng-click="test()">
-			<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Test
-		</button>
-
-		<span>
-		<img src="assets/img/yellow-circle.png" id="yellow-circle"  	 	
-		   	 class="toolbar-gadget" 
-			 player-color="yellow" 
-		   	 clone-draggable />
-		</span>
-		<img src="assets/img/red-circle.png" id="red-circle" 
-			 class="toolbar-gadget" 
-			 player-color="red" 
-			 clone-draggable />			
-
 	</div>		 	
 </div>
 

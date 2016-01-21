@@ -18,7 +18,14 @@ angular.module('coach.tactics', ['ngRoute'])
 		return $scope.idCounter++;
 	};
 
-	$scope.editMode = false;
+	$scope.isAnimateMode = function() {
+		return $scope.button.radio == 1;
+	};
+
+$scope.button = {
+  "radio": 1
+};
+	//$scope.mode = { "radio": 1 };
 
 	$scope.plans = tacticsService.getPlanList();
 	$scope.selectedPlan = tacticsService.newPlan();
@@ -46,16 +53,8 @@ angular.module('coach.tactics', ['ngRoute'])
 			$scope.selectedPlan = tacticsService.newPlan();
 	});	
 
-	$scope.edit = function() {
-		$scope.editMode = true;
-	};
-
-	$scope.cancelEdit = function() {
-		$scope.editMode = false;
-	};
-
 	$scope.save = function() {
-		$scope.editMode = false;
+		alert($scope.button.radio);
 	};	
 
 	$scope.test = function() {
