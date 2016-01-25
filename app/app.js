@@ -2,16 +2,18 @@
 
 // Declare app level module which depends on views, and components
 angular.module('coach', [
-  'ngRoute',
-  'ngSanitize',
-  'ngAnimate',
+  'ngRoute', 'ngSanitize', 'ngAnimate',
+
   'mgcrea.ngStrap',
+
   'coach.team',
   'coach.schedule',
   'coach.tactics',
   'coach.field',
+  'coach.animation',
   'coach.home',
-  'adminMenu'
+  'coach.drag',
+  'coach.panels'
 ])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});

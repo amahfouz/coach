@@ -4,7 +4,7 @@ angular.module('coach.tactics', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/tactics', {
-    templateUrl: 'ng/tactics/tactics.html' 
+    templateUrl: 'ng/tactics/tactics.html	' 
   });
 }])
 
@@ -14,21 +14,23 @@ angular.module('coach.tactics', ['ngRoute'])
 
 	$scope.idCounter = 0;
 
+	$scope.button = {
+	  selected: 1
+	};
+
+
 	this.nextId = function() {
 		return $scope.idCounter++;
 	};
 
 	$scope.isAnimateMode = function() {
-		return $scope.button.radio == 1;
+		return $scope.button.selected == 1;
 	};
 
-$scope.button = {
-  "radio": 1
-};
 	//$scope.mode = { "radio": 1 };
 
 	$scope.plans = tacticsService.getPlanList();
-	$scope.selectedPlan = tacticsService.newPlan();
+	$scope.selectedPlan = tacticsService.getById(1);
 	
 	$scope.selected = {'planId': undefined};
 
@@ -54,10 +56,10 @@ $scope.button = {
 	});	
 
 	$scope.save = function() {
-		alert($scope.button.radio);
+		alert($scope.button.selected);
 	};	
 
-	$scope.test = function() {
+	$scope.play = function() {
 		if (! $scope.selectedPlan)
 			return;
 
@@ -71,7 +73,7 @@ $scope.button = {
 	};
 
 	this.addPlayer = function(x, y, color) {
-		var newId = "player" + this.nextId();                                       
+		var newId = $scope.playerId(this.nextId());                                       
 		var playerInfo = {'id': newId, 'x': x, 'y': y, 'color': color};
 
 		$scope.selectedPlan.players.push(playerInfo);
@@ -127,6 +129,23 @@ $scope.button = {
 		    dropdown.show();
 	    });
 	};	
+
+	$scope.addAnimationPhase = function(){
+		console.log("addAnimationPhase");
+		var phases = $scope.selectedPlan.animation;
+		var newPhase = 				 
+			{'label': "Phase " + phases.length + 1, 
+			  'duration': 1000, 
+			  'transitions': []
+			 };
+
+		phases.push(newPhase);
+	};
+
+	$scope.deleteAnimationPhase = function(index) {
+		var phases = $scope.selectedPlan.animation;
+		phases.splice(index, 1);
+	};
 })
 ;
 

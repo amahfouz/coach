@@ -19,6 +19,8 @@ $field-image: '../img/soccer-field.png';
 	@extend .player-base;
 	vertical-align: center;
     z-index: 4;
+    padding-left: 4;
+    padding-right: 4;
 }
 
 #playingField {
@@ -28,6 +30,18 @@ $field-image: '../img/soccer-field.png';
     margin-top: $vertical-spacing;
     background-image: url($field-image);
     background-repeat: no-repeat;
-    
     position: relative;
+}
+
+#adminFloatingMenu {
+    position: absolute;
+    left: 50px;
+    top: 200px;
+    z-index: 200;
+}
+
+#animationPaneContent {
+    max-height: 400px;
+    width: 300px;
+    overflow: auto;
 }

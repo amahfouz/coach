@@ -14,8 +14,7 @@ angular.module('coach.field', [])
 })
 .directive("draggablePlayer", function() {
 	return {
-		templateUrl: "ng/field/player.html",
-		//controller: "TacticsCtrl",
+		templateUrl: "ng/tactics/field/player.html",
 		replace: true,
 		require: "^soccerField",
 		link: { 
@@ -38,7 +37,7 @@ angular.module('coach.field', [])
 })
 .directive("soccerField", function(tacticsService, $compile) {
 	return {
-		templateUrl: "ng/field/field.tpl.html",
+		templateUrl: "ng/tactics/field/field.tpl.html",
 		controller: "TacticsCtrl",
 	    link: function($scope, element, attrs, controller) {
 	    	element.droppable({		
