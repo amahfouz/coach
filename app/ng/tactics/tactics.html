@@ -9,41 +9,29 @@
    Setup [Animate]                        Play                         Save
 
 -->
-<div class="row btn-toolbar" role="toolbar">
-
-	<div class="col-md-5">
-		
-		<div class="btn-group" ng-model="button.selected" bs-radio-group>
- 		  <label class="btn btn-default">
- 		  	 <input type="radio" class="btn btn-default" value="0">Setup
- 		  </label>
- 		  <label class="btn btn-default">
- 		   	 <input type="radio" class="btn btn-default" value="1">Animate
- 		  </label>
+<div id="dragging-area">
+	<div class="row" id="tactics-toolbar">
+		<div class="col-md-4 col-xs-4">
+			<div class="btn-group" role="group">
+				<img src="assets/img/yellow-circle.png" id="yellow-circle"  	 	
+				   	 class="toolbar-gadget" player-color="yellow" clone-draggable />
+				<img src="assets/img/red-circle.png" id="red-circle" 
+					 class="toolbar-gadget" player-color="red" clone-draggable />
+			</div>
 		</div>
-
-		<div class="btn-group" role="group" ng-hide="isAnimateMode()">
-			<img src="assets/img/yellow-circle.png" id="yellow-circle"  	 	
-			   	 class="toolbar-gadget" player-color="yellow" clone-draggable />
-			<img src="assets/img/red-circle.png" id="red-circle" 
-				 class="toolbar-gadget" player-color="red" clone-draggable />
+		<div class="col-md-4 col-xs-4">
+			<div class="">
+				Text
+			</div>
+		</div>
+		<div class="col-md-4 col-xs-4">
+			<button type="submit" class="btn btn-primary pull-right" ng-click="play()">
+				<span class="glyphicon glyphicon-play-circle"></span> Play
+			</button>
 		</div>
 	</div>
 
-	 <div class="col-md-2">
-		<button type="submit" class="btn btn-primary" ng-click="play()">
-			<span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Play
-		</button>
-	</div>
-
-	<div class="col-md-5">
-		<button type="submit" class="btn btn-success pull-right" ng-click="save()">
-			<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
-		</button>
-	</div>		 	
-
-
-	 <draggable id="adminFloatingMenu" ng-show="isAnimateMode()">
+	<draggable id="adminFloatingMenu">
 	 	<floating-panel title="Animation">
 	 		<pane-content><animation-tree></animation-tree></pane-content>
 	 		<pane-footer>
@@ -55,15 +43,13 @@
 				<br>
 			</pane-footer>
 	 	</floating-panel>
-	 </draggable>
+	</draggable>
 
-
+	<div class="row">
+		<div class="col-md-12" soccer-field id="playingField"></div>
+	</div>
 
 </div>
-
-<div soccer-field id="playingField"></div>
-
-
 
 
 

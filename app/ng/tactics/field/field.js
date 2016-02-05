@@ -20,7 +20,7 @@ angular.module('coach.field', [])
 		link: { 
 			post: function postLink($scope, element, attrs, tacticsCtrl) {
 				element.draggable
-					 ({ cursor: "crosshair", containment: 'parent', 
+					 ({ cursor: "crosshair", containment: '#dragging-area', 
 						stop: function(event, ui) {
 							$scope.$apply(function() {
 								if (! event) 

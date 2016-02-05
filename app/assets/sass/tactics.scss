@@ -7,7 +7,6 @@ $field-image: '../img/soccer-field.png';
 .player-base {
     max-width: $player-diameter;
     width: auto;
-    
 }
 
 .player {
@@ -33,6 +32,10 @@ $field-image: '../img/soccer-field.png';
     position: relative;
 }
 
+#tactics-toolbar {
+    max-width: $field-width; 
+}
+
 #adminFloatingMenu {
     position: absolute;
     left: 50px;
@@ -45,3 +48,4 @@ $field-image: '../img/soccer-field.png';
     width: 300px;
     overflow: auto;
 }
+

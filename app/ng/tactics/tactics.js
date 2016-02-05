@@ -1,30 +1,21 @@
 'use strict';
 
-angular.module('coach.tactics', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/tactics', {
-    templateUrl: 'ng/tactics/tactics.html	' 
-  });
-}])
+angular.module('coach.tactics', [])
 
 .service('tacticsService', TacticsServiceFactory) 
 
-.controller('TacticsCtrl', function($scope, $alert, $dropdown, tacticsService) {
+.controller('TacticsCtrl', function($scope, tacticsService) {
 
 	$scope.idCounter = 0;
 
-	$scope.button = {
-	  selected: 1
-	};
-
+	$scope.radioModel = 0;
 
 	this.nextId = function() {
 		return $scope.idCounter++;
 	};
 
 	$scope.isAnimateMode = function() {
-		return $scope.button.selected == 1;
+		return $scope.radioModel == 1;
 	};
 
 	//$scope.mode = { "radio": 1 };
@@ -56,7 +47,7 @@ angular.module('coach.tactics', ['ngRoute'])
 	});	
 
 	$scope.save = function() {
-		alert($scope.button.selected);
+		alert($scope.radioModel);
 	};	
 
 	$scope.play = function() {
@@ -80,55 +71,61 @@ angular.module('coach.tactics', ['ngRoute'])
 	};
 
 	this.updatePlayer = function(playerId, newX, newY) {
+
 		if (!$scope.selectedPlan)
 			return;
 
+		var playerNumber = rawId(playerId);
+
 		var item = _.find($scope.selectedPlan.players, function(item) {
-			return item.id == playerId;
+			return item.id == playerNumber;
 		});
-		
+
 		if (!item)
 			return;
 
 		item.x = newX;
-		item.y = newY ;
+		item.y = newY;
+
+		if (item.y < 36)
+			_.pull($scope.selectedPlan.players, item);
 	};
 
-	$scope.showCtxMenu = function(player) {
-		var elementId = player.id;
-		var element = $('#' + elementId);
+	// $scope.showCtxMenu = function(player) {
+	// 	var elementId = player.id;
+	// 	var element = $('#' + elementId);
 
-		var dropdown = $dropdown(element, {
-			show: false,
-			trigger: "manual",
-			html: true
-		});
+	// 	var dropdown = $dropdown(element, {
+	// 		show: false,
+	// 		trigger: "manual",
+	// 		html: true
+	// 	});
 
-		dropdown.$scope.selectedPlayer = player;
+	// 	dropdown.$scope.selectedPlayer = player;
 
-		dropdown.$scope.deletePlayer = function(playerInfo) {
-			if (! $scope.selectedPlan) {
-				return;
-			}
+	// 	dropdown.$scope.deletePlayer = function(playerInfo) {
+	// 		if (! $scope.selectedPlan) {
+	// 			return;
+	// 		}
 
-			_.remove($scope.selectedPlan.players, function(p) {
-				return p.id == playerInfo.id;
-			});
-		};
+	// 		_.remove($scope.selectedPlan.players, function(p) {
+	// 			return p.id == playerInfo.id;
+	// 		});
+	// 	};
 
-        dropdown.$scope.content = 
-	  	  [
-		    {text: '<i class="fa fa-download"></i>&nbsp;Another action', "click": 'console.log("First item")'},
-		    {text: '<i class="fa fa-globe"></i>&nbsp;Display an alert', "click": '$alert("Holy guacamole!")'},
-		    {text: '<i class="fa fa-remove"></i>&nbsp;Delete', "click": 'deletePlayer(selectedPlayer)'},
-		    {divider: true},
-		    {text: 'Separated link', href: '#separatedLink'}
-	      ];
+ //        dropdown.$scope.content = 
+	//   	  [
+	// 	    {text: '<i class="fa fa-download"></i>&nbsp;Another action', "click": 'console.log("First item")'},
+	// 	    {text: '<i class="fa fa-globe"></i>&nbsp;Display an alert', "click": '$alert("Holy guacamole!")'},
+	// 	    {text: '<i class="fa fa-remove"></i>&nbsp;Delete', "click": 'deletePlayer(selectedPlayer)'},
+	// 	    {divider: true},
+	// 	    {text: 'Separated link', href: '#separatedLink'}
+	//       ];
 
-		dropdown.$promise.then(function () {
-		    dropdown.show();
-	    });
-	};	
+	// 	dropdown.$promise.then(function () {
+	// 	    dropdown.show();
+	//     });
+	// };	
 
 	$scope.addAnimationPhase = function(){
 		console.log("addAnimationPhase");
@@ -235,3 +232,6 @@ function idFor(playerNumberId) {
 	return 'player' + playerNumberId;
 }
 
+function rawId(playerElementId) {
+	return playerElementId.replace(/^player/, '');
+}

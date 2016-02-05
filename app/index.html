@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="coach" class="no-js"> <!--<![endif]-->
+<html lang="en" class="no-js"> <!--<![endif]-->
 
 <head>
   <meta charset="utf-8">
@@ -17,71 +17,19 @@
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/tactics.css">
   <link rel="stylesheet" href="lib/floating-panel/floating-window.css">
-</head>
 
-<!-- ........................... Body ........................... -->
-
-<body>
-<div class="container-fluid">
-  <div class="row">
-      <nav class="navbar navbar-default" bs-navbar>
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              
-              <a data-match-route="/home" class="navbar-brand" href="#home">
-                <img alt="Brand" id="brand-image" src="assets/img/soccer-ball.png"> 
-              </a>
- 
-              </div> <!-- navbar-header -->
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li data-match-route="/team"><a href="#team">Team 
-                <span class="sr-only">(current)</span></a></li>
-              <li data-match-route="/schedule"><a href="#schedule">Schedule
-                <span class="sr-only">(current)</span></a></li>
-              <li data-match-route="/tactics"><a href="#/tactics/">Tactics
-                <span class="sr-only">(current)</span></a></li>
-            </ul>
-          </div> <!-- bs-example-navbar-collapse-1 -->
-
-      </nav>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <div ng-view id="ng-view"></div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ........................... Scripts ........................... -->
- 
-  
   <script src="lib/jquery/dist/jquery.js"></script>
   <script src="lib/lodash/lodash.js"></script>
   <script src="lib/chance/chance.js"></script>
   <script src="lib/async/lib/async.js"></script>
   <script src="lib/jquery-ui/jquery-ui.js"></script>
-
-<script src="lib/bootstrap/bootstrap.js"></script>
-  
+  <script src="lib/bootstrap/bootstrap.js"></script>
   <script src="lib/angular/angular.js"></script>
-  <script src="lib/angular-route/angular-route.js"></script>
+  <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="lib/angular-ui-router-tabs/src/ui-router-tabs.js"></script>
   <script src="lib/angular-animate/angular-animate.js"></script>
   <script src="lib/angular-sanitize/angular-sanitize.js"></script>
-
-  <script src="lib/angular-strap/dist/angular-strap.js"></script>
-  <script src="lib/angular-strap/dist/angular-strap.tpl.js"></script>
+  <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
   <script src="app.js"></script>
   <script src="ng/util/draggable.js"></script>
@@ -93,7 +41,67 @@
   
   <script src="ng/tactics/field/field.js"></script>
   <script src="ng/tactics/animation/animation.js"></script>
+  
 
+</head>
+
+<!-- ........................... Body ........................... -->
+
+<body ng-app="coach" ng-controller="MainCtrl">
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a data-match-route="/home" class="navbar-brand" href="#home">
+        <img alt="Brand" id="brand-image" src="assets/img/soccer-ball.png"> 
+      </a>
+          
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+    <tabs data="tabData" type="pills" tab-classes="btn-sm"/>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manage <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li data-match-route="/team"><a href="#team">Team 
+                <span class="sr-only">(current)</span></a></li>
+              <li data-match-route="/schedule"><a href="#schedule">Schedule
+                <span class="sr-only">(current)</span></a></li>
+              <li data-match-route="/tactics"><a href="#/tactics/">Tactics
+                <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+<div class="container-fluid">
+  <div ui-view id="ng-view"></div>
+</div>
+
+
+<!-- ........................... Scripts ........................... -->
+ 
+  <script> 
+      // include nav-bar
+
+     // $(function(){
+     //     $("#navBarPlaceHolder").load("nav-bar.html"); 
+     //  });
+  </script> 
 
  </body>
 </html>

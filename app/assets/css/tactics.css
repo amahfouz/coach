@@ -20,6 +20,10 @@
   background-repeat: no-repeat;
   position: relative; }
 
+#tactics-toolbar {
+  max-width: 1280px;
+  background-color: blue; }
+
 #adminFloatingMenu {
   position: absolute;
   left: 50px;

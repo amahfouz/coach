@@ -1,13 +1,6 @@
 'use strict';
 
-angular.module('coach.schedule', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/schedule', {
-    templateUrl: 'ng/schedule/schedule.html',
-    controller: 'ScheduleCtrl'
-  });
-}])
+angular.module('coach.schedule', [])
 
 .service('gameSchedule', GameScheduleFactory)
 

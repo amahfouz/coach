@@ -1,15 +1,8 @@
 'use strict';
 
-angular.module('coach.team', ['ngRoute'])
+angular.module('coach.team', [])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/team', {
-    templateUrl: 'ng/team/team.html',
-    controller: 'TeamCtrl'
-  });
-}])
-
-.controller('TeamCtrl', function($scope, $alert) {
+.controller('TeamCtrl', function($scope) {
 	$scope.players = [{'name': 'John Doe', 'shirt': '4'}, 
 					  {'name': 'Josh Foe', 'shirt': '10'}, 
 					  {'name': 'Joe Blow', 'shirt': '7'}];
@@ -29,7 +22,7 @@ angular.module('coach.team', ['ngRoute'])
 			  "show": true
 		    };
 
-		    $alert(missingInputAlert);
+		    //$alert(missingInputAlert);
     		return;
     	}
     	this.players.push({'name': this.newPlayerName,'shirt': this.newPlayerShirt});
