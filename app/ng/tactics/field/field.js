@@ -14,7 +14,7 @@ angular.module('coach.field', [])
 })
 .directive("draggablePlayer", function() {
 	return {
-		templateUrl: "ng/tactics/field/player.html",
+		templateUrl: "ng/tactics/field/player.tpl.html",
 		replace: true,
 		require: "^soccerField",
 		link: { 
