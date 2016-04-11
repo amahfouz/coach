@@ -14,6 +14,12 @@ $field-image: '../img/soccer-field.png';
     position: absolute;
 }
 
+.player.selected {
+    border-radius: $player-diameter / 2;
+    border-style: solid;
+    border-width: 3px;
+}
+
 .toolbar-gadget {
 	@extend .player-base;
 	vertical-align: center;
@@ -38,7 +44,7 @@ $field-image: '../img/soccer-field.png';
 
 #adminFloatingMenu {
     position: absolute;
-    left: 50px;
+    left: 150px;
     top: 200px;
     z-index: 200;
 }
