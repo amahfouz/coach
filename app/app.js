@@ -4,6 +4,7 @@
 angular.module('coach', [
   'ngSanitize', 
   'ngAnimate',
+  'toaster',
   'ui.bootstrap',
   'ui.router',
   'ui.router.tabs',
@@ -52,7 +53,8 @@ angular.module('coach', [
             templateUrl: 'ng/team/team.html',
             controller:  'TeamCtrl' 
         })
-});
+})
+
 ;
 
 
