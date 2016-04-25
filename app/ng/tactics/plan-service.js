@@ -1,80 +1,86 @@
 angular.module('coach.tactics')
+.factory('planService', function($log) {
 
-.factory('planService', function(Constants) {
+    // constructor function for Plan objects
 
-    var selectedPlanId = 1;
-    var plans = [
-        {
-            'id': 1,
-            'name': 'Default',
-            'players' : [
-                {'id': 1, 'x': '50', 'y': '50', 'color': 'yellow'},
-                {'id': 2, 'x': '160', 'y': '160', 'color': 'red'},
-                {'id': 3, 'x': '220', 'y': '220', 'color': 'yellow'},
-            ],
-            'animation' : [
-                 {'label': "Phase 1", 
-                  'duration': 1000, 
-                  'transitions': [
-                     {'id': 1, 'x': '100', 'y': '80'},
-                     {'id': 2, 'x': '250', 'y': '20'}
-                  ]
-                 },
-                 {'label': "Phase 2", 
-                  'duration': 1500, 
-                  'transitions': [
-                     {'id': 3, 'x': '270', 'y': '10'},
-                  ]
-                 }
-            ]
-        }, 
-        {
-            'id': 2,
-            'name': 'Attack',
-            'players' : [
-                {'id': 1, 'x': '20', 'y': '20', 'color': 'yellow'},
-                {'id': 2, 'x': '60', 'y': '60', 'color': 'red'},
-                {'id': 3, 'x': '120', 'y': '120', 'color': 'yellow'},
-            ],
-            'animation' : [
-            ]
-        }       
-    ];
+    function Plan(plan) {
+        if (plan)
+            angular.extend(this, plan);
+    };
 
-    return {
-        getSelectedPlan : function() {
-            return this.getById(selectedPlanId);
-        },
+    // private methods
 
-        newPlan : function() {
-            return {'name': "New Tactic", 'players': [], 'animation':[]};
-        },
+    function nextId(plan) {
+        // extract the IDs
+        var playerIds = _.map(plan.players, function(player) { return player.id; });
 
-        getPlanList : function() {
-            return _.map(plans, function(entry) { 
-                return _.pick(entry, ['id', 'name']);
-            });
-        },
-
-        getById : function(id) {
-            return _.find(plans, function(value) {
-                return id == value.id;
-            });
-        },
-
-        setSelectedPlan: function(planId) {
-            if (planId == selectedPlanId)
-                return;
-
-            // only notify if actually changes
-              
-            selectedPlanId = planId;
-            $rootScope.$broadcast(Constants.SELECTED_PLAN_CHANGED_EVENT);
-        }
-
-        // addListener: function(scope, callback) {
-        //     var destroyHandler = $rootScope.$on(SELECTED_PLAN_CHANGED_EVENT, callback);
-        //     scope.$on('$destroy', destroyHandler);
-        // }
+        // pick the number that is one-greater than the greatest ID
+        return _.last(_.sortBy(playerIds)) + 1;
     }
+
+    // add plan manipulation methods to the Plan class
+
+    Plan.prototype = {
+        addPlayer : function(x, y, color) {
+
+            var playerId = nextId(this);
+            this.players.push({'id': playerId, 'x': x, 'y': y});
+        },
+
+        updatePlayer: function(playerId, newX, newY) {
+
+            var player = this.getPlayer(playerId);
+
+            if (! player) {
+                $log.log("Player with ID " + playerId + " not found.");
+                return;
+            }
+
+            player.x = newX;
+            player.y = newY;            
+        },
+
+        removePlayer: function(playerId) {
+            var playerToRemove = this.getPlayer(playerId);
+            if (! playerToRemove) {
+                $log.log("Player with ID " + playerId + " not found.");
+                return;
+            }
+            _.pull(this.players, playerToRemove);
+
+            // now remove corresponding animation from every phase if any
+
+            _(this.animation).forEach(function(phase) {
+                _.pullAllWith(phase.transitions, playerId, function(arrVal, otherVal) { return arrVal.id == otherVal; } );
+                //var playerTransitionIndex = _.findIndex(transitions, function(trans) { return trans.id == playerId} );  
+            });
+            
+        },
+
+        getPlayer : function(playerId) {
+            return _.find(this.players, function(player) {
+                return playerId == player.id;
+            });            
+        },
+
+        addPhase : function() {
+            if (! this.animation)
+                this.animation = [];
+            
+            var newPhase =               
+                {'label': "Phase " + this.animation.length + 1, 
+                  'duration': 1000, 
+                  'transitions': []
+                 };
+
+            this.animation.push(newPhase);
+        },
+
+        deletePhase : function(index) {
+            this.animation.splice(index, 1);
+        }
+    };
+
+    // return the constructor function
+    return Plan;
 });
