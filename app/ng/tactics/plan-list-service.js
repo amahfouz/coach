@@ -55,7 +55,7 @@ angular.module('coach.tactics')
         },
 
         getSelectedPlan : function() {
-            return new Plan(this.getById(selectedPlanId));
+            return new planService(this.getById(selectedPlanId));
         },
 
         newPlan : function() {
