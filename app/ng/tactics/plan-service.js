@@ -4,6 +4,7 @@ angular.module('coach.tactics')
     // constructor function for Plan objects
 
     function Plan(plan) {
+        this.uid = Math.round(Math.random() * 10000 );
         if (plan)
             angular.extend(this, plan);
     };
@@ -11,6 +12,10 @@ angular.module('coach.tactics')
     // private methods
 
     function nextId(plan) {
+
+        if (! plan.players || plan.players.length == 0)
+            return 1;
+
         // extract the IDs
         var playerIds = _.map(plan.players, function(player) { return player.id; });
 
@@ -24,7 +29,7 @@ angular.module('coach.tactics')
         addPlayer : function(x, y, color) {
 
             var playerId = nextId(this);
-            this.players.push({'id': playerId, 'x': x, 'y': y});
+            this.players.push({'id': playerId, 'x': x, 'y': y, 'color': color});
         },
 
         updatePlayer: function(playerId, newX, newY) {
