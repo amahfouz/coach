@@ -1,27 +1,56 @@
-<div id="animationPaneContent">
-  <div class="panel-group" id="accordion" close-others="false" role="tablist" aria-multiselectable="true">
+<floating-panel title="Animation">
+  
+  <pane-content>
+      <div id="animationPaneContent" ng-controller="AnimationCtrl">
+
+        <div class="panel-group" id="accordion" close-others="false" role="tablist">
+          
+          <div class="panel panel-default" ng-repeat="phase in getPhases()">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <span role="button" data-toggle="collapse" data-target="#collapse{{$index}}">
+                  Phase {{$index}}
+                </span>
+                <button type="submit" 
+                        class="btn btn-xs btn-danger pull-right" 
+                        ng-click="deleteAnimationPhase($index)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>  
+              </h4>
+            </div>
+
+            <div id="collapse{{$index}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                  <ul class="list-group">
+                    <li ng-repeat="step in phase.transitions" class="list-group-item">{{step}}
+                    </li>
+                  </ul>
+            </div>
+          </div>
+        </div>  
+      </div>
+  </pane-content>
+
+  <pane-footer ng-controller="AnimationCtrl">
     
-    <div class="panel panel-default" ng-repeat="phase in selectedPlan.animation">
-      <div class="panel-heading" role="tab" id="headingOne">
-        <h4 class="panel-title">
-          <span role="button" data-toggle="collapse" data-target="#collapse{{$index}}" aria-expanded="true" aria-controls="collapseOne">
-            Phase {{$index}}
-          </span>
-          <button type="submit" 
-                  class="btn btn-xs btn-danger pull-right" 
-                  ng-click="deleteAnimationPhase($index)">
-              <span class="glyphicon glyphicon-remove"></span>
-          </button>  
-        </h4>
+    <button type="submit" 
+            class="btn btn-success btn-small" 
+            ng-click="play()">
+        <span class="glyphicon glyphicon-play"></span>
+    </button>
 
-      </div>
+    <button type="submit" 
+            class="btn btn-success btn-small" 
+            ng-click="reset()">
+        <span class="glyphicon glyphicon-fast-backward"></span>
+    </button>
 
-      <div id="collapse{{$index}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-            <ul class="list-group">
-              <li ng-repeat="step in phase.transitions" class="list-group-item">{{step}}
-              </li>
-            </ul>
-      </div>
-    </div>
-  </div>  
-</div>
+    <button type="submit" 
+            class="btn btn-xs btn-success pull-right" 
+            ng-click="addAnimationPhase()">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+    </button>  
+    <br>
+  </pane-footer>
+</floating-panel>
+
+
