@@ -8,6 +8,7 @@ angular.module('coach', [
   'ui.bootstrap',
   'ui.router',
   'ui.router.tabs',
+  'coach.geometry',
   'coach.schedule',
   'coach.tactics',
   'coach.team',
