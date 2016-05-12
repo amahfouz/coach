@@ -16,7 +16,7 @@ angular.module('coach.geometry', [])
                 var x1 = scope.lineInfo.x1;
                 var x2 = scope.lineInfo.x2;
                 var y1 = scope.lineInfo.y1;
-                var y2 = lineInfo.y2;
+                var y2 = scope.lineInfo.y2;
 
                 var a = x1 - x2,
                     b = y1 - y2,
