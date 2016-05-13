@@ -8,7 +8,7 @@ angular.module('coach.field', [])
 		link: function(scope, element, attrs, controller) {
 			element.draggable({ helper:'clone', 
 				                revert: 'invalid', 
-				                cursor: "crosshair"});	
+				                cursor: "auto"});	
 		}
 	};
 })
@@ -20,14 +20,16 @@ angular.module('coach.field', [])
 		link: { 
 			post: function postLink($scope, element, attrs, tacticsCtrl) {
 				element.draggable
-					 ({ cursor: "crosshair", containment: '#dragging-area', 
+					 ({ cursor: "auto", containment: '#dragging-area', 
 						stop: function(event, ui) {
 							$scope.$apply(function() {
 								if (! event) 
 									return;
 
-								var el = event.target;
-								tacticsCtrl.updatePlayer(el.id, el.offsetLeft, el.offsetTop);
+								var target = event.target;
+								var jqEl = $(target);
+
+								tacticsCtrl.updatePlayer(jqEl.attr("player-id"), target.offsetLeft, target.offsetTop);
 							});
 						}
 					  });
@@ -35,7 +37,7 @@ angular.module('coach.field', [])
 		}
 	};
 })
-.directive("soccerField", function(tacticsService, $compile) {
+.directive("soccerField", function() {
 	return {
 		templateUrl: "ng/tactics/field/field.tpl.html",
 		controller: "TacticsCtrl",
