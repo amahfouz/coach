@@ -1,2 +1,13 @@
+<div>
+    <div draggable-player 
+         ng-repeat="playerInfo in getPlayers()" 
+         player-info="playerInfo">
+    </div>
 
-<div draggable-player ng-repeat="playerInfo in selectedPlan.players" player-info="playerInfo"></div>
+    <div ng-if="! isAnimating"
+         slanted-line
+         ng-repeat="slanted in getSlantedLines()"
+         line-info="slanted">
+    </div>
+</div>
+
