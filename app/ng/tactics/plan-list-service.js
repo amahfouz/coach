@@ -3,30 +3,14 @@ angular.module('coach.tactics')
 .factory('planListService', function(Constants, planService, $rootScope) {
 
     var selectedPlanId;
-    var plans = [
+
+    // raw plan data as retrieved from persistence
+    var store = [
         {
             'id': 1,
             'name': 'Default',
-            'players' : [
-                {'id': 1, 'x': '50', 'y': '50', 'color': 'yellow'},
-                {'id': 2, 'x': '160', 'y': '160', 'color': 'red'},
-                {'id': 3, 'x': '220', 'y': '220', 'color': 'yellow'},
-            ],
-            'animation' : [
-                 {'label': "Phase 1", 
-                  'duration': 1000, 
-                  'transitions': [
-                     {'id': 1, 'x': '100', 'y': '80'},
-                     {'id': 2, 'x': '250', 'y': '20'}
-                  ]
-                 },
-                 {'label': "Phase 2", 
-                  'duration': 1500, 
-                  'transitions': [
-                     {'id': 3, 'x': '270', 'y': '10'},
-                  ]
-                 }
-            ]
+            'players' : [],
+            'animation' : []
         }, 
         {
             'id': 2,
@@ -41,9 +25,22 @@ angular.module('coach.tactics')
         }       
     ];
 
+    // dictionary of planService.Plan objects
+    var cache = {};
+
+    // private functions
+
+    function loadFromStore(id) {
+        return _.find(store, function(value) {
+            return id == value.id;
+        });
+    };
+
+
+    // public API
+
     return {
         ensureValidSelection: function() {
-            console.log("ensureValidSelection");
             if (selectedPlanId)
                 return;
 
@@ -55,7 +52,10 @@ angular.module('coach.tactics')
         },
 
         getSelectedPlan : function() {
-            return new planService(this.getById(selectedPlanId));
+            if (! cache[selectedPlanId]) {
+                cache[selectedPlanId] = new planService(loadFromStore(selectedPlanId)); 
+            }
+            return cache[selectedPlanId];
         },
 
         newPlan : function() {
@@ -63,14 +63,8 @@ angular.module('coach.tactics')
         },
 
         getPlanList : function() {
-            return _.map(plans, function(entry) { 
+            return _.map(store, function(entry) { 
                 return _.pick(entry, ['id', 'name']);
-            });
-        },
-
-        getById : function(id) {
-            return _.find(plans, function(value) {
-                return id == value.id;
             });
         },
 
@@ -81,13 +75,12 @@ angular.module('coach.tactics')
             // only notify if actually changes
               
             selectedPlanId = planId;
-            console.log("Broadcasting");
+            
             $rootScope.$broadcast(Constants.SELECTED_PLAN_CHANGED_EVENT, null);
         }
     }
 })
 .run(function(planListService) {
-    console.log("run planListService!");
     // select a plan and a trigger the selection of a phase
     planListService.ensureValidSelection();
 })
