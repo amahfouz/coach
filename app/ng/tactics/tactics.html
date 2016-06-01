@@ -19,34 +19,22 @@
 					 class="toolbar-gadget" player-color="red" clone-draggable />
 			</div>
 		</div>
-		<div class="col-md-4 col-xs-4">
+		<div class="col-md-2 col-xs-2">
 			<div class="">
-				Text
+				Plan Name
 			</div>
 		</div>
 		<div class="col-md-4 col-xs-4">
-			<button type="submit" class="btn btn-primary pull-right" ng-click="play()">
-				<span class="glyphicon glyphicon-play-circle"></span> Play
-			</button>
+			<toaster-container></toaster-container>
 		</div>
 	</div>
 
 	<draggable id="adminFloatingMenu">
-	 	<floating-panel title="Animation">
-	 		<pane-content><animation-tree></animation-tree></pane-content>
-	 		<pane-footer>
-	 			<button type="submit" 
-				        class="btn btn-xs btn-success pull-right" 
-				        ng-click="addAnimationPhase()">
-				    <span class="glyphicon glyphicon-plus-sign"></span>
-				</button>  
-				<br>
-			</pane-footer>
-	 	</floating-panel>
+		<animation-tree></animation-tree>
 	</draggable>
 
 	<div class="row">
-		<div class="col-md-12" soccer-field id="playingField"></div>
+		<div class="col-md-12" soccer-field id="playingField" ng-click="handleFieldClicked($event)"></div>
 	</div>
 
 </div>
