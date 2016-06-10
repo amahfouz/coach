@@ -1,5 +1,6 @@
-<img id="{{playerId(playerInfo.id)}}"
+<img player-id="{{playerInfo.id}}"
 	 ng-src="assets/img/{{playerInfo.color}}-circle.png"
 	 class="player" 
-	 ng-click="showCtxMenu(playerInfo)"
+     ng-class="{'selected': playerInfo.id == selectedPlayerId}"
+	 ng-click="startAddAnimation($event, playerInfo)"
 	 ng-style="{'left': playerInfo.x +'px', 'top': playerInfo.y +'px', 'position': 'absolute', 'z-index': 10}"/>
