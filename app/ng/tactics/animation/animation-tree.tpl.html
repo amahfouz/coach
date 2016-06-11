@@ -4,12 +4,12 @@
       <div id="animationPaneContent" ng-controller="AnimationCtrl">
 
         <div class="panel-group" id="accordion" close-others="false" role="tablist">
-          
+         
           <div class="panel panel-default" ng-repeat="phase in getPhases()">
-            <div class="panel-heading" role="tab" id="headingOne">
-              <h4 class="panel-title">
-                <span role="button" data-toggle="collapse" data-target="#collapse{{$index}}">
-                  Phase {{$index}}
+            <div class="panel-heading" role="tab" id="headingOne" ng-click="selectPhase($index)">
+              <h4 class="panel-title"> 
+                <span role="button" data-toggle="collapse" data-target="#collapse{{$index}}"> 
+                Phase {{phase.id + 1}} <span class="glyphicon glyphicon-hand-left" ng-if="getSelectedPhase().id==phase.id"></span>
                 </span>
                 <button type="submit" 
                         class="btn btn-xs btn-danger pull-right" 
@@ -21,7 +21,7 @@
 
             <div id="collapse{{$index}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                   <ul class="list-group">
-                    <li ng-repeat="step in phase.transitions" class="list-group-item">{{step}}
+                    <li ng-repeat="step in phase.getTransitions()" class="list-group-item">Player {{step.id}} to ({{step.x}}, {{step.y}})
                     </li>
                   </ul>
             </div>
@@ -34,7 +34,8 @@
     
     <button type="submit" 
             class="btn btn-success btn-small" 
-            ng-click="play()">
+            ng-click="play()"
+            ng-disabled="! isAnimateButtonEnabled()">
         <span class="glyphicon glyphicon-play"></span>
     </button>
 
