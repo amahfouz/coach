@@ -96,8 +96,7 @@ angular.module('coach.tactics')
             // now remove corresponding animation from every phase if any
 
             _(this.animation).forEach(function(phase) {
-                _.pullAllWith(phase.transitions, playerId, function(arrVal, otherVal) { return arrVal.id == otherVal; } );
-                //var playerTransitionIndex = _.findIndex(transitions, function(trans) { return trans.id == playerId} );  
+                phase.removeTransitionById(playerId);
             });
           
             updateComputedValues(this);  

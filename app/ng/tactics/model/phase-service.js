@@ -25,8 +25,23 @@ angular.module('coach.tactics')
         },
 
         addTransition : function(transition) {
+
+            // first remove existing animation for player if exists
+            this.removeTransitionById(transition.id);
+
+            // add the transition
             transitions.push(transition);
+
+            // notify listener that phase data changed
             this.listener(this.id);
+        },
+
+        removeTransitionById : function(playerId) {
+            // _.remove mutates the array
+            _.remove(transitions, function(transition) {
+                return transition.id == playerId;
+            });
+
         }
     };       
 

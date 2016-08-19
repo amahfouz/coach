@@ -60,7 +60,15 @@ angular.module('coach.field', [])
 		}
 	};
 })
+// translates the input with 'offset' pixels
+.filter('translate', function() {
+	return function(input, offset) {
+		_.forOwn(input, function(value, key) {
+			console.log("Key " + key + " value " + value);
+			input["key"] = value + offset;
+		});
+		return input;
+	}
+})
 ;
 
-// .controller('FieldCtrl', function($scope) {
-// });
